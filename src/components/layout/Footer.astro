@@ -1,0 +1,108 @@
+---
+import { restaurantConfig } from '../../data/restaurant.ts';
+
+// Iconos de lucide-react
+import { 
+  MapPin, 
+  Phone, 
+  Mail, 
+  Clock,
+  Instagram,
+  Facebook,
+  Twitter 
+} from 'lucide-react';
+---
+
+<footer class="bg-[#0F0D0B] text-[#F8F1E3] pt-24 pb-12 border-t border-white/10">
+  <div class="max-w-7xl mx-auto px-6">
+    
+    <!-- Main grid -->
+    <div class="grid md:grid-cols-12 gap-x-12 gap-y-16">
+      
+      <div class="md:col-span-4">
+        <p class="font-display text-6xl tracking-tighter text-primary mb-6">
+          {restaurantConfig.name}
+        </p>
+        <p class="max-w-md text-lg leading-relaxed text-white/70">
+          {restaurantConfig.description}
+        </p>
+        
+        <!-- Línea decorativa -->
+        <div class="h-px w-20 bg-gradient-to-r from-primary to-transparent mt-12"></div>
+      </div>
+
+      <div class="md:col-span-3">
+        <div class="flex items-center gap-x-3 mb-6">
+          <Clock class="w-5 h-5 text-primary" />
+          <p class="uppercase tracking-widest text-xs font-medium text-white/50">Horarios</p>
+        </div>
+        
+        <div class="space-y-3 text-sm">
+          {Object.entries(restaurantConfig.location.hours).map(([day, hours]) => (
+            <div key={day} class="flex justify-between">
+              <span class="text-white/70">{day}</span>
+              <span class="font-medium">{hours}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div class="md:col-span-5">
+        <p class="uppercase tracking-widest text-xs font-medium text-white/50 mb-6">Contacto</p>
+        <div class="space-y-4 text-lg">
+         <a href={`tel:${restaurantConfig.location.phone}`} class="flex items-center gap-x-4 group">
+              <div class="w-10 h-10 rounded-2xl bg-white/5 flex items-center justify-center group-hover:bg-primary/10 transition">
+                <Phone class="w-5 h-5 text-primary" />
+              </div>
+              <div>
+                <p class="font-medium">{restaurantConfig.location.phone}</p>
+              </div>
+            </a>
+
+            <a href={`mailto:${restaurantConfig.location.email}`} class="flex items-center gap-x-4 group">
+              <div class="w-10 h-10 rounded-2xl bg-white/5 flex items-center justify-center group-hover:bg-primary/10 transition">
+                <Mail class="w-5 h-5 text-primary" />
+              </div>
+              <div>
+                <p class="font-medium">{restaurantConfig.location.email}</p>
+              </div>
+            </a>
+
+            <div class="flex items-center gap-x-4">
+              <div class="w-10 h-10 rounded-2xl bg-white/5 flex items-center justify-center">
+                <MapPin class="w-5 h-5 text-primary" />
+              </div>
+              <p class="text-white/70 leading-tight">
+                {restaurantConfig.location.address}
+              </p>
+            </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Barra inferior -->
+    <div class="mt-24 pt-12 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-y-6 text-sm">
+      
+      <!-- Copyright -->
+      <p class="text-white/40">
+        © {new Date().getFullYear()} Digitalsolutionscloud. Todos los derechos reservados.
+      </p>
+
+      <div class="flex gap-x-8 text-3xl">
+        <a href={restaurantConfig.social.instagram} target="_blank" class="text-white/60 hover:text-primary transition">
+          <Instagram class="w-7 h-7" />
+        </a>
+        <a href={restaurantConfig.social.facebook} target="_blank" class="text-white/60 hover:text-primary transition">
+          <Facebook class="w-7 h-7" />
+        </a>
+        <a href={restaurantConfig.social.twitter} target="_blank" class="text-white/60 hover:text-primary transition">
+          <Twitter class="w-7 h-7" />
+        </a>
+      </div>
+
+      <!-- Crédito -->
+      <p class="text-white/40 text-xs flex items-center gap-x-2">
+        Hecho con <span class="text-primary">❤️</span> en Digitalsolutionscloud
+      </p>
+    </div>
+  </div>
+</footer>

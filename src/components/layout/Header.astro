@@ -1,0 +1,30 @@
+---
+import { restaurantConfig } from '../../data/restaurant.ts';
+import ThemeToggle from '../ui/ThemeToggle.tsx';
+---
+
+<header class="fixed top-0 left-0 right-0 z-50 glass border-b border-white/10">
+  <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+    <a href="#" class="font-display text-4xl tracking-tighter text-primary">Restaurante</a>
+
+    <nav class="hidden lg:flex gap-x-10 text-sm font-medium">
+      <a href="#about" class="hover:text-primary transition">Nosotros</a>
+      <a href="#menu" class="hover:text-primary transition">Menú</a>
+      <a href="#gallery" class="hover:text-primary transition">Galería</a>
+      <a href="#location" class="hover:text-primary transition">Ubicación</a>
+    </nav>
+
+    <div class="flex items-center gap-x-6">
+      <ThemeToggle client:load />
+      
+      <button onclick="window.dispatchEvent(new Event('openReservationModal'))"
+        class="btn-primary px-9 py-3.5 rounded-3xl font-medium text-sm shadow-lg">
+        Reservar mesa
+      </button>
+
+      <label for="sidebar-toggle" class="lg:hidden cursor-pointer p-3">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </label>
+    </div>
+  </div>
+</header>

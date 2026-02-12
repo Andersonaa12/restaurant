@@ -1,0 +1,43 @@
+---
+import { restaurantConfig } from '../../data/restaurant.ts';
+import SectionHeading from '../common/SectionHeading.astro';
+---
+
+<section id="gallery" class="py-24 bg-zinc-50 dark:bg-zinc-950">
+  <SectionHeading title="Galería" subtitle="Un viaje visual por Restaurante" />
+  
+  <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+    {restaurantConfig.gallery.map((img, i) => (
+      <div 
+        key={i}
+        onclick={`openLightbox('${img.url}')`}
+        class="group relative overflow-hidden rounded-3xl cursor-pointer aspect-video"
+      >
+        <img src={img.url} alt={img.alt} class="w-full h-full object-cover group-hover:scale-110 transition duration-500" />
+        <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 p-6">
+          <p class="text-white text-sm">{img.caption}</p>
+        </div>
+      </div>
+    ))}
+  </div>
+
+  <dialog id="lightbox" class="bg-black/95 m-auto max-w-5xl w-full p-4 rounded-3xl">
+    <div class="relative">
+      <button onclick="closeLightbox()" class="absolute top-4 right-4 text-white text-5xl leading-none">×</button>
+      <img id="lightbox-img" class="max-h-[85vh] w-full object-contain" />
+    </div>
+  </dialog>
+
+  <script>
+    function openLightbox(src: string) {
+      const dialog = document.getElementById('lightbox') as HTMLDialogElement;
+      const img = document.getElementById('lightbox-img') as HTMLImageElement;
+      img.src = src;
+      dialog.showModal();
+    }
+    function closeLightbox() {
+      const dialog = document.getElementById('lightbox') as HTMLDialogElement;
+      dialog.close();
+    }
+  </script>
+</section>

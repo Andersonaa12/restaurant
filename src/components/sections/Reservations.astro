@@ -1,0 +1,17 @@
+---
+import { restaurantConfig } from '../../data/restaurant.ts';
+import SectionHeading from '../common/SectionHeading.astro';
+---
+
+<section id="reservations" class="py-32 bg-gradient-to-br from-[#1F1A17] to-black text-white">
+  <div class="max-w-4xl mx-auto px-6 text-center">
+    <SectionHeading title="Reserva tu mesa" subtitle="Experiencias limitadas cada noche" />
+    
+    <button onclick="window.dispatchEvent(new Event('openReservationModal'))"
+      class="btn-primary text-[#1F1A17] text-2xl px-20 py-8 rounded-3xl mt-10 shadow-2xl hover:scale-105 transition">
+      Abrir calendario de reservas
+    </button>
+    
+    <p class="mt-10 text-accent/60">o llama al <span class="text-white">{restaurantConfig.location.phone}</span></p>
+  </div>
+</section>

@@ -1,0 +1,11 @@
+---
+import { restaurantConfig } from '../../data/restaurant.ts';
+---
+
+<iframe
+  src={restaurantConfig.location.googleMapsEmbed}
+  class="w-full h-96 rounded-3xl shadow-2xl"
+  style="border:0;"
+  allowfullscreen
+  loading="lazy"
+/>

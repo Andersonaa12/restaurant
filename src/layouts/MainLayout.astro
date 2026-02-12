@@ -1,0 +1,40 @@
+---
+import { restaurantConfig } from '../data/restaurant.ts';
+import '../styles/globals.css';
+
+import Header from '../components/layout/Header.astro';
+import Sidebar from '../components/layout/Sidebar.astro';
+import Footer from '../components/layout/Footer.astro';
+import ReservationModal from '../components/ui/ReservationModal.tsx';
+import { ViewTransitions } from 'astro:transitions';
+---
+
+<!doctype html>
+<html lang="es" class="scroll-smooth dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{restaurantConfig.name}</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@400;600;700&display=swap" />
+  </head>
+  <body class="bg-[#F9F5EB] dark:bg-[#0F0D0B] text-[#1F1A17] dark:text-[#F8F1E3]">
+    <ViewTransitions />
+
+    <!-- Checkbox solo para móvil -->
+    <input type="checkbox" id="sidebar-toggle" class="peer hidden" />
+
+    <!-- Sidebar SOLO en móvil -->
+    <Sidebar />
+
+    <!-- Contenido principal: sin margen fijo en desktop -->
+    <div class="flex-1 transition-all duration-500">
+      <Header />
+      <main class="pt-20">
+        <slot />
+      </main>
+      <Footer />
+    </div>
+
+    <ReservationModal client:load />
+  </body>
+</html>

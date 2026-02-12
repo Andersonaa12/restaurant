@@ -1,0 +1,92 @@
+---
+import { restaurantConfig } from '../../data/restaurant.ts';
+import ThemeToggle from '../ui/ThemeToggle.tsx';
+
+// Iconos de lucide-react
+import { 
+  Home, 
+  ChefHat, 
+  Menu, 
+  Image, 
+  MapPin, 
+  Calendar,
+  Instagram,
+  Facebook,
+  Twitter 
+} from 'lucide-react';
+---
+
+<aside 
+  class="fixed inset-y-0 left-0 z-50 w-72 glass border-r border-white/10 
+         translate-x-[-100%] lg:hidden peer-checked:translate-x-0 
+         transition-transform duration-500 ease-out">
+
+  <!-- Logo -->
+  <div class="p-8 border-b border-white/10">
+    <a href="#" class="flex items-center gap-x-3">
+      <span class="font-display text-5xl tracking-tighter text-primary">Restaurante</span>
+    </a>
+  </div>
+
+  <!-- Navegación -->
+  <nav class="px-6 py-10 space-y-1">
+    <a href="#hero" 
+       onclick="document.getElementById('sidebar-toggle').checked = false"
+       class="flex items-center gap-x-4 px-6 py-4 rounded-3xl hover:bg-white/10 transition group">
+      <Home class="w-5 h-5 icon-gradient" />
+      <span class="font-medium">Inicio</span>
+    </a>
+    
+    <a href="#about" 
+       onclick="document.getElementById('sidebar-toggle').checked = false"
+       class="flex items-center gap-x-4 px-6 py-4 rounded-3xl hover:bg-white/10 transition group">
+      <ChefHat class="w-5 h-5 icon-gradient" />
+      <span class="font-medium">Nosotros</span>
+    </a>
+    
+    <a href="#menu" 
+       onclick="document.getElementById('sidebar-toggle').checked = false"
+       class="flex items-center gap-x-4 px-6 py-4 rounded-3xl hover:bg-white/10 transition group">
+      <Menu class="w-5 h-5 icon-gradient" />
+      <span class="font-medium">Menú</span>
+    </a>
+    
+    <a href="#gallery" 
+       onclick="document.getElementById('sidebar-toggle').checked = false"
+       class="flex items-center gap-x-4 px-6 py-4 rounded-3xl hover:bg-white/10 transition group">
+      <Image class="w-5 h-5 icon-gradient" />
+      <span class="font-medium">Galería</span>
+    </a>
+    
+    <a href="#location" 
+       onclick="document.getElementById('sidebar-toggle').checked = false"
+       class="flex items-center gap-x-4 px-6 py-4 rounded-3xl hover:bg-white/10 transition group">
+      <MapPin class="w-5 h-5 icon-gradient" />
+      <span class="font-medium">Ubicación</span>
+    </a>
+    
+    <a href="#reservations" 
+       onclick="document.getElementById('sidebar-toggle').checked = false"
+       class="flex items-center gap-x-4 px-6 py-4 rounded-3xl hover:bg-white/10 transition group">
+      <Calendar class="w-5 h-5 icon-gradient" />
+      <span class="font-medium">Reservas</span>
+    </a>
+  </nav>
+
+  <!-- Acciones móviles (abajo) -->
+  <div class="absolute bottom-0 left-0 right-0 p-8 border-t border-white/10">
+
+    <!-- Redes sociales con iconos -->
+    <div class="flex justify-center gap-x-8 mt-12 text-3xl">
+      <a href={restaurantConfig.social.instagram} target="_blank" class="text-accent/60 hover:text-primary transition">
+        <Instagram class="w-7 h-7" />
+      </a>
+      <a href={restaurantConfig.social.facebook} target="_blank" class="text-accent/60 hover:text-primary transition">
+        <Facebook class="w-7 h-7" />
+      </a>
+      <a href={restaurantConfig.social.twitter} target="_blank" class="text-accent/60 hover:text-primary transition">
+        <Twitter class="w-7 h-7" />
+      </a>
+    </div>
+  </div>
+</aside>

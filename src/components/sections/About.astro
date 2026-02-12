@@ -1,0 +1,39 @@
+---
+import { restaurantConfig } from '../../data/restaurant.ts';
+import SectionHeading from '../common/SectionHeading.astro';
+---
+
+<section id="about" class="py-32 bg-white dark:bg-[#0F0D0B]">
+  <div class="max-w-6xl mx-auto px-6">
+    <SectionHeading title={restaurantConfig.about.title} subtitle="Tradición reescrita con luz" />
+    
+    <div class="grid lg:grid-cols-2 gap-16 items-center">
+      <div class="space-y-10">
+        <div class="prose prose-xl dark:prose-invert leading-relaxed">
+          <p>{restaurantConfig.about.story}</p>
+        </div>
+        
+        <div class="flex flex-col sm:flex-row gap-6">
+          <div class="glass p-8 rounded-3xl flex-1 text-center card-hover">
+            <div class="mx-auto w-14 h-14 rounded-2xl bg-gradient-to-br from-primary to-[#E8C46A] flex items-center justify-center text-3xl mb-4">🍷</div>
+            <p class="font-medium text-lg">120+ etiquetas</p>
+            <p class="text-sm text-accent/60">Vinos italianos seleccionados</p>
+          </div>
+          <div class="glass p-8 rounded-3xl flex-1 text-center card-hover">
+            <div class="mx-auto w-14 h-14 rounded-2xl bg-gradient-to-br from-primary to-[#E8C46A] flex items-center justify-center text-3xl mb-4">👨‍🍳</div>
+            <p class="font-medium text-lg">Alessandro Rossi</p>
+            <p class="text-sm text-accent/60">Chef ejecutivo</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="relative rounded-3xl overflow-hidden shadow-2xl">
+        <img src={restaurantConfig.about.image} class="w-full" alt="Restaurante" />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+        <div class="absolute bottom-8 left-8 text-white">
+          <p class="text-4xl font-display tracking-tighter">Desde 2022</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

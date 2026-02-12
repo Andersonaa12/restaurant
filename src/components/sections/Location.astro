@@ -1,0 +1,34 @@
+---
+import { restaurantConfig } from '../../data/restaurant.ts';
+import SectionHeading from '../common/SectionHeading.astro';
+import GoogleMap from '../ui/GoogleMap.astro';
+---
+
+<section id="location" class="py-32 bg-white dark:bg-[#0F0D0B]">
+  <div class="max-w-6xl mx-auto px-6">
+    <SectionHeading title="Encuéntranos" subtitle="Via della Luce 42, Roma" />
+    
+    <div class="grid lg:grid-cols-5 gap-12">
+      <div class="lg:col-span-2 space-y-12">
+        <div class="glass p-10 rounded-3xl">
+          <div class="flex items-center gap-5 mb-6">
+            <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-primary to-[#E8C46A] flex items-center justify-center text-3xl">📍</div>
+            <div>
+              <p class="font-medium text-xl">{restaurantConfig.location.address}</p>
+            </div>
+          </div>
+          <a href={`tel:${restaurantConfig.location.phone}`} class="block text-2xl hover:text-primary transition">{restaurantConfig.location.phone}</a>
+        </div>
+        
+        <a href={`https://www.google.com/maps/dir/?api=1&destination=${restaurantConfig.location.lat},${restaurantConfig.location.lng}`} 
+          target="_blank" class="btn-primary w-full py-7 text-xl rounded-3xl flex items-center justify-center gap-4">
+          Cómo llegar <span class="text-2xl">→</span>
+        </a>
+      </div>
+      
+      <div class="lg:col-span-3">
+        <GoogleMap />
+      </div>
+    </div>
+  </div>
+</section>

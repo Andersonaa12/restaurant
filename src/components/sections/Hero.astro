@@ -1,0 +1,26 @@
+---
+import { restaurantConfig } from '../../data/restaurant.ts';
+---
+
+<section id="hero" class="min-h-screen relative flex items-center overflow-hidden">
+  <div class="absolute inset-0 bg-[radial-gradient(at_center,#D4AF37_0%,transparent_70%)] opacity-20"></div>
+  <img src={restaurantConfig.heroImage} class="absolute inset-0 w-full h-full object-cover" alt="" />
+  
+  <div class="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-black/70" />
+  
+  <div class="relative max-w-5xl mx-auto px-6 text-center text-white z-10">
+    <p class="uppercase tracking-[4px] text-sm mb-4 text-accent">Restaurante • 2026</p>
+    <h1 class="font-display text-8xl md:text-[110px] leading-none tracking-tighter mb-6">
+      {restaurantConfig.name}
+    </h1>
+    <p class="text-3xl font-light max-w-2xl mx-auto">{restaurantConfig.tagline}</p>
+    
+    <div class="mt-16 flex flex-col sm:flex-row gap-6 justify-center">
+      <a href="#menu" class="btn-primary px-14 py-6 text-lg rounded-3xl">Explorar menú</a>
+      <button onclick="window.dispatchEvent(new Event('openReservationModal'))"
+        class="border-2 border-white/70 hover:bg-white hover:text-secondary px-14 py-6 text-lg rounded-3xl transition">
+        Reservar mesa
+      </button>
+    </div>
+  </div>
+</section>

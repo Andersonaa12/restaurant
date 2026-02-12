@@ -1,0 +1,29 @@
+---
+import { restaurantConfig } from '../../data/restaurant.ts';
+import SectionHeading from '../common/SectionHeading.astro';
+---
+
+<section id="testimonials" class="py-32 bg-[#F9F5EB] dark:bg-[#0F0D0B]">
+  <div class="max-w-6xl mx-auto px-6">
+    <SectionHeading title="Voces de nuestros clientes" subtitle="Lo que se vive en Restaurante" />
+    
+    <div class="grid md:grid-cols-3 gap-8">
+      {restaurantConfig.testimonials.map((t, i) => (
+        <div key={i} class="glass rounded-3xl p-10 card-hover">
+          <div class="flex gap-1 text-primary text-2xl mb-8">
+            {'★'.repeat(t.rating)}
+          </div>
+          <p class="text-xl leading-relaxed italic">“{t.text}”</p>
+          
+          <div class="flex items-center gap-4 mt-12">
+            <img src={t.image} class="w-14 h-14 rounded-2xl object-cover" alt={t.name} />
+            <div>
+              <p class="font-medium">{t.name}</p>
+              <p class="text-sm text-accent/60">{t.role}</p>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

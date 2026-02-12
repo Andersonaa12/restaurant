@@ -1,0 +1,67 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@400;600;700&display=swap');
+
+@theme {
+  --color-primary: #D4AF37;
+  --color-secondary: #1F1A17;
+  --color-accent: #F4EDE4;
+  --color-gradient-start: #D4AF37;
+  --color-gradient-end: #E8C46A;
+  
+  --radius-3xl: 1.75rem;
+}
+
+/* Glassmorphism + Gradientes globales */
+.glass {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dark .glass {
+  background: rgba(15, 13, 11, 0.75);
+  border: 1px solid rgba(212, 175, 55, 0.15);
+}
+
+/* Iconos con gradiente */
+.icon-gradient {
+  background: linear-gradient(135deg, var(--color-gradient-start), var(--color-gradient-end));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Hover 3D premium */
+.card-hover {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.card-hover:hover {
+  transform: translateY(-12px) scale(1.02);
+  box-shadow: 0 25px 50px -12px rgb(212 175 55 / 0.25);
+}
+
+/* Scroll suave + animaciones */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Inter", system-ui, sans-serif;
+  transition: background-color 0.6s ease;
+}
+
+/* Tipografía display */
+.font-display {
+  font-family: "Playfair Display", serif;
+}
+
+/* Botones premium */
+.btn-primary {
+  background: linear-gradient(90deg, #D4AF37, #E8C46A);
+  color: #1F1A17;
+  transition: all 0.3s ease;
+}
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px -10px #D4AF37;
+}
