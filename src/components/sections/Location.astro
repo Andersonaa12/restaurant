@@ -4,29 +4,84 @@ import SectionHeading from '../common/SectionHeading.astro';
 import GoogleMap from '../ui/GoogleMap.astro';
 ---
 
-<section id="location" class="py-32 bg-white dark:bg-[#0F0D0B]">
-  <div class="max-w-6xl mx-auto px-6">
-    <SectionHeading title="Encuéntranos" subtitle="Via della Luce 42, Roma" />
-    
-    <div class="grid lg:grid-cols-5 gap-12">
-      <div class="lg:col-span-2 space-y-12">
-        <div class="glass p-10 rounded-3xl">
-          <div class="flex items-center gap-5 mb-6">
-            <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-primary to-[#E8C46A] flex items-center justify-center text-3xl">📍</div>
+<section 
+  id="location" 
+  class="relative py-4 md:py-48 overflow-hidden bg-gradient-to-b from-[#FAF7F2] via-[#F9F5EB] to-[#FAF7F2] 
+          dark:from-[#0F0D0B] dark:via-[#1A1612] dark:to-[#0F0D0B] transition-all duration-1000"
+>
+  <!-- Fondo sutil de brasas ascendentes -->
+  <div class="absolute inset-0 pointer-events-none opacity-40 dark:opacity-20">
+    <div class="absolute top-1/4 left-1/5 w-96 h-96 bg-orange-500/20 rounded-full blur-3xl animate-ember-float animation-delay-[-5s]"></div>
+    <div class="absolute top-1/3 right-1/4 w-80 h-80 bg-yellow-600/15 rounded-full blur-3xl animate-ember-float animation-delay-[-11s]"></div>
+    <div class="absolute bottom-1/3 left-1/3 w-96 h-96 bg-red-700/20 rounded-full blur-3xl animate-ember-float animation-delay-[-8s]"></div>
+    <div class="absolute bottom-1/4 right-1/5 w-80 h-80 bg-orange-600/15 rounded-full blur-3xl animate-ember-float animation-delay-[-14s]"></div>
+  </div>
+
+  <div class="relative max-w-7xl mx-auto px-6 z-10">
+    <!-- Heading premium -->
+    <div class="text-center mb-20 animate-fade-in-up">
+      <SectionHeading 
+        title="Encuéntranos" 
+        subtitle="Ven a vivir el fuego con nosotros" 
+      />
+    </div>
+
+    <div class="grid lg:grid-cols-5 gap-16 items-start">
+      <!-- Información + horarios -->
+      <div class="lg:col-span-2 space-y-10">
+        <!-- Card de dirección y contacto -->
+        <div class="glass rounded-3xl p-12 card-hover">
+          <div class="flex items-center gap-6 mb-10">
+            <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-gold to-[#b38f2b] flex items-center justify-center text-4xl shadow-xl">
+              📍
+            </div>
             <div>
-              <p class="font-medium text-xl">{restaurantConfig.location.address}</p>
+              <p class="font-display text-3xl font-bold text-text-light dark:text-text-dark">
+                {restaurantConfig.location.address}
+              </p>
             </div>
           </div>
-          <a href={`tel:${restaurantConfig.location.phone}`} class="block text-2xl hover:text-primary transition">{restaurantConfig.location.phone}</a>
+
+          <div class="space-y-8">
+            <a 
+              href={`tel:${restaurantConfig.location.phone}`}
+              class="flex items-center gap-5 group"
+            >
+              <div class="w-12 h-12 rounded-2xl bg-gold/10 flex items-center justify-center text-3xl group-hover:scale-110 transition-transform">📞</div>
+              <div>
+                <p class="text-2xl font-medium text-gold">{restaurantConfig.location.phone}</p>
+                <p class="text-sm text-gold/70">Llámanos para reservar</p>
+              </div>
+            </a>
+
+            <a 
+              href={`mailto:${restaurantConfig.location.email}`}
+              class="flex items-center gap-5 group"
+            >
+              <div class="w-12 h-12 rounded-2xl bg-gold/10 flex items-center justify-center text-3xl group-hover:scale-110 transition-transform">✉️</div>
+              <div>
+                <p class="text-2xl font-medium text-gold">{restaurantConfig.location.email}</p>
+                <p class="text-sm text-gold/70">Escríbenos</p>
+              </div>
+            </a>
+          </div>
         </div>
-        
-        <a href={`https://www.google.com/maps/dir/?api=1&destination=${restaurantConfig.location.lat},${restaurantConfig.location.lng}`} 
-          target="_blank" class="btn-primary w-full py-7 text-xl rounded-3xl flex items-center justify-center gap-4">
-          Cómo llegar <span class="text-2xl">→</span>
+
+        <!-- Botón Cómo llegar -->
+        <a 
+          href={`https://www.google.com/maps/dir/?api=1&destination=${restaurantConfig.location.lat},${restaurantConfig.location.lng}`}
+          target="_blank"
+          class="group relative block w-full py-8 text-center text-xl font-bold text-black bg-gradient-to-r from-gold to-[#b38f2b] rounded-3xl shadow-2xl overflow-hidden transition-all hover:scale-105 active:scale-95"
+        >
+          <span class="relative z-10 flex items-center justify-center gap-4">
+            Cómo llegar <span class="text-3xl group-hover:rotate-45 transition-transform">→</span>
+          </span>
+          <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
         </a>
       </div>
-      
-      <div class="lg:col-span-3">
+
+      <!-- Mapa -->
+      <div class="lg:col-span-3 rounded-3xl overflow-hidden shadow-2xl border border-gold/10">
         <GoogleMap />
       </div>
     </div>

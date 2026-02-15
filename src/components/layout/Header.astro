@@ -5,7 +5,7 @@ import ThemeToggle from '../ui/ThemeToggle.tsx';
 
 <header class="fixed top-0 left-0 right-0 z-50 glass border-b border-white/10">
   <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-    <a href="#" class="font-display text-4xl tracking-tighter text-primary">Restaurante</a>
+    <a href="#" class="font-display text-4xl tracking-tighter text-primary">Brasas & Leños</a>
 
     <nav class="hidden lg:flex gap-x-10 text-sm font-medium">
       <a href="#about" class="hover:text-primary transition">Nosotros</a>
@@ -28,3 +28,13 @@ import ThemeToggle from '../ui/ThemeToggle.tsx';
     </div>
   </div>
 </header>
+<script is:inline>
+  (function () {
+    const theme = localStorage.getItem('theme');
+    if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  })();
+</script>

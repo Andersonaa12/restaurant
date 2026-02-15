@@ -3,37 +3,130 @@ import { restaurantConfig } from '../../data/restaurant.ts';
 import SectionHeading from '../common/SectionHeading.astro';
 ---
 
-<section id="about" class="py-32 bg-white dark:bg-[#0F0D0B]">
-  <div class="max-w-6xl mx-auto px-6">
-    <SectionHeading title={restaurantConfig.about.title} subtitle="Tradición reescrita con luz" />
-    
-    <div class="grid lg:grid-cols-2 gap-16 items-center">
-      <div class="space-y-10">
-        <div class="prose prose-xl dark:prose-invert leading-relaxed">
-          <p>{restaurantConfig.about.story}</p>
+<section 
+  id="about" 
+  class="relative py-24 md:py-40 overflow-hidden bg-gradient-to-b from-white via-[#FAF7F2] to-white dark:from-[#0F0D0B] dark:via-[#1A1612] dark:to-[#0F0D0B] transition-all duration-1000"
+>
+  <!-- Fondo sutil con brasas ascendentes (ember particles) – muy ligero y premium -->
+  <div class="absolute inset-0 pointer-events-none opacity-40 dark:opacity-20">
+    <div class="absolute top-1/4 left-1/5 w-96 h-96 bg-orange-500/20 rounded-full blur-3xl animate-[ember-float_22s_infinite_linear] animation-delay-[-4s]"></div>
+    <div class="absolute top-1/3 right-1/4 w-80 h-80 bg-yellow-600/15 rounded-full blur-3xl animate-[ember-float_28s_infinite_linear] animation-delay-[-10s]"></div>
+    <div class="absolute bottom-1/3 left-1/3 w-96 h-96 bg-red-700/20 rounded-full blur-3xl animate-[ember-float_20s_infinite_linear] animation-delay-[-7s]"></div>
+  </div>
+
+  <div class="relative max-w-7xl mx-auto px-6 z-10">
+    <!-- Heading con entrada premium -->
+    <div class="text-center mb-20 opacity-0 animate-[fade-in-up_1.2s_cubic-bezier(0.16,1,0.3,1)_0.4s_forwards]">
+      <SectionHeading 
+        title={restaurantConfig.about.title} 
+        subtitle="Tradición en brasas vivas" 
+        class="text-[#D4AF37] drop-shadow-lg"
+      />
+    </div>
+
+    <div class="grid lg:grid-cols-2 gap-16 xl:gap-32 items-center">
+      <!-- Columna de texto y highlights -->
+      <div class="space-y-16">
+        <!-- Historia / Story -->
+        <div 
+          class="prose prose-xl dark:prose-invert max-w-none leading-relaxed text-balance text-gray-700 dark:text-gray-200 opacity-0 animate-[fade-in-up_1.4s_cubic-bezier(0.16,1,0.3,1)_0.8s_forwards] drop-shadow-sm"
+        >
+          <p class="text-lg md:text-xl">{restaurantConfig.about.story}</p>
         </div>
-        
-        <div class="flex flex-col sm:flex-row gap-6">
-          <div class="glass p-8 rounded-3xl flex-1 text-center card-hover">
-            <div class="mx-auto w-14 h-14 rounded-2xl bg-gradient-to-br from-primary to-[#E8C46A] flex items-center justify-center text-3xl mb-4">🍷</div>
-            <p class="font-medium text-lg">120+ etiquetas</p>
-            <p class="text-sm text-accent/60">Vinos italianos seleccionados</p>
+
+        <!-- Highlights cards – más premium con glassmorphism profundo, glow dorado pulsante y hover lift -->
+        <div class="grid sm:grid-cols-2 gap-10">
+          <div 
+            class="group relative glass-morphism p-12 rounded-3xl text-center backdrop-blur-md border border-white/10 shadow-2xl overflow-hidden opacity-0 animate-[fade-in-up_1s_cubic-bezier(0.16,1,0.3,1)_1.2s_forwards] hover:scale-105 hover:shadow-3xl transition-all duration-700"
+          >
+            <!-- Glow pulsante dorado detrás -->
+            <div class="absolute inset-0 bg-gradient-to-br from-[#D4AF37]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-1000 blur-xl"></div>
+            
+            <div class="relative z-10">
+              <div class="mx-auto w-24 h-24 rounded-full bg-gradient-to-br from-[#D4AF37] to-[#b38f2b] flex items-center justify-center text-5xl mb-8 shadow-xl transition-transform duration-500 group-hover:scale-115 group-hover:rotate-6">
+                🥩
+              </div>
+              <p class="font-display text-3xl font-bold text-gray-900 dark:text-white mb-2">Cortes Premium</p>
+              <p class="text-lg text-[#D4AF37]/80">Seleccionados y madurados a la perfección</p>
+            </div>
           </div>
-          <div class="glass p-8 rounded-3xl flex-1 text-center card-hover">
-            <div class="mx-auto w-14 h-14 rounded-2xl bg-gradient-to-br from-primary to-[#E8C46A] flex items-center justify-center text-3xl mb-4">👨‍🍳</div>
-            <p class="font-medium text-lg">Alessandro Rossi</p>
-            <p class="text-sm text-accent/60">Chef ejecutivo</p>
+
+          <div 
+            class="group relative glass-morphism p-12 rounded-3xl text-center backdrop-blur-md border border-white/10 shadow-2xl overflow-hidden opacity-0 animate-[fade-in-up_1s_cubic-bezier(0.16,1,0.3,1)_1.4s_forwards] hover:scale-105 hover:shadow-3xl transition-all duration-700 animation-delay-300"
+          >
+            <div class="absolute inset-0 bg-gradient-to-br from-[#D4AF37]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-1000 blur-xl"></div>
+            
+            <div class="relative z-10">
+              <div class="mx-auto w-24 h-24 rounded-full bg-gradient-to-br from-[#D4AF37] to-[#b38f2b] flex items-center justify-center text-5xl mb-8 shadow-xl transition-transform duration-500 group-hover:scale-115 group-hover:-rotate-6">
+                🔥
+              </div>
+              <p class="font-display text-3xl font-bold text-gray-900 dark:text-white mb-2">Brasas & Leños</p>
+              <p class="text-lg text-[#D4AF37]/80">Cocción lenta sobre fuego vivo</p>
+            </div>
           </div>
         </div>
       </div>
-      
-      <div class="relative rounded-3xl overflow-hidden shadow-2xl">
-        <img src={restaurantConfig.about.image} class="w-full" alt="Restaurante" />
-        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-        <div class="absolute bottom-8 left-8 text-white">
-          <p class="text-4xl font-display tracking-tighter">Desde 2022</p>
+
+      <!-- Columna de imagen con overlay cálido y texto impactante -->
+      <div 
+        class="relative rounded-3xl overflow-hidden shadow-3xl opacity-0 animate-[fade-in-up_1.6s_cubic-bezier(0.16,1,0.3,1)_1s_forwards]"
+      >
+        <img 
+          src={restaurantConfig.about.image} 
+          alt="Interior cálido de Brasas & Leños – Ambiente de asador premium"
+          class="w-full h-full object-cover transition-transform duration-[20s] ease-out hover:scale-110 will-change-transform"
+          loading="lazy"
+        />
+        
+        <!-- Overlay cálido con efecto de calor -->
+        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent mix-blend-multiply"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-orange-600/10 to-transparent opacity-50"></div>
+
+        <!-- Texto "Desde 2022" con glow pulsante de brasas -->
+        <div class="absolute bottom-12 left-12 text-white">
+          <p class="text-7xl md:text-8xl font-display tracking-tighter leading-none drop-shadow-2xl">
+            Desde
+            <span class="block text-[#D4AF37] relative">
+              2022
+              <span class="absolute inset-0 text-[#D4AF37] blur-xl opacity-70 animate-[glow-pulse_3s_infinite_ease-in-out]">
+                2022
+              </span>
+            </span>
+          </p>
+          <p class="text-2xl mt-4 font-light tracking-wide opacity-90">Pasión por el fuego</p>
         </div>
       </div>
     </div>
   </div>
 </section>
+
+<style is:global>
+  .glass-morphism {
+    background: rgba(255, 255, 255, 0.07);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+  
+  @keyframes fade-in-up {
+    from {
+      opacity: 0;
+      transform: translateY(80px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes ember-float {
+    0% { transform: translate(0, 0) rotate(0deg); opacity: 0.4; }
+    33% { transform: translate(80px, -120px) rotate(20deg); opacity: 0.8; }
+    66% { transform: translate(-60px, -80px) rotate(-15deg); opacity: 0.6; }
+    100% { transform: translate(0, 0) rotate(0deg); opacity: 0.4; }
+  }
+
+  @keyframes glow-pulse {
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 0.9; }
+  }
+</style>

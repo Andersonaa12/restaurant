@@ -1,5 +1,8 @@
+'use client';
+
 import React, { useState, useEffect } from 'react';
-import { Calendar, X } from 'lucide-react';
+import { Calendar, X, Phone } from 'lucide-react';
+import { restaurantConfig } from '../../data/restaurant.ts';
 
 const ReservationModal: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -9,9 +12,9 @@ const ReservationModal: React.FC = () => {
     guests: '2',
     name: '',
     email: '',
+    phone: '',
   });
 
-  // Escuchar evento global para abrir el modal
   useEffect(() => {
     const handler = () => setIsOpen(true);
     window.addEventListener('openReservationModal', handler);
@@ -20,71 +23,76 @@ const ReservationModal: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    alert('¡Reserva recibida! (demo – en producción se enviaría por email/API)');
+    alert('¡Reserva recibida con éxito! (demo)');
     setIsOpen(false);
-    setForm({ date: '', time: '', guests: '2', name: '', email: '' });
+    setForm({ date: '', time: '', guests: '2', name: '', email: '', phone: '' });
   };
 
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/70 backdrop-blur-xl p-4">
-      {/* Modal container */}
-      <div 
-        className="glass w-full max-w-lg rounded-3xl p-10 relative animate-in fade-in zoom-in duration-300"
-        style={{ animation: 'modalPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)' }}
-      >
-        {/* Botón cerrar */}
+    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-xl px-4 py-6 overflow-y-auto">
+      {/* Contenedor principal responsivo */}
+      <div className="glass w-full max-w-md sm:max-w-lg md:max-w-xl lg:max-w-2xl rounded-3xl p-6 sm:p-8 md:p-10 lg:p-12 relative overflow-hidden animate-fade-in-up max-h-[90vh] overflow-y-auto">
+        {/* Glow sutil */}
+        <div className="absolute inset-0 bg-gradient-to-br from-gold/10 to-transparent pointer-events-none" />
+
+        {/* Botón cerrar – siempre visible y accesible */}
         <button
           onClick={() => setIsOpen(false)}
-          className="absolute top-6 right-6 w-10 h-10 flex items-center justify-center rounded-2xl hover:bg-white/10 transition text-3xl text-accent/70 hover:text-white"
+          className="absolute top-4 right-4 sm:top-6 sm:right-6 z-50 w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center rounded-full bg-black/30 hover:bg-black/50 transition text-gold text-3xl sm:text-4xl focus:outline-none focus:ring-2 focus:ring-gold"
+          aria-label="Cerrar modal"
         >
-          <X className="w-6 h-6" />
+          <X className="w-6 h-6 sm:w-7 h-7" />
         </button>
 
-        {/* Header con icono */}
-        <div className="flex items-center gap-4 mb-10">
-          <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary to-[#E8C46A] flex items-center justify-center">
-            <Calendar className="w-7 h-7 text-[#1F1A17]" />
+        {/* Header – ajustado para móvil */}
+        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6 mb-8 sm:mb-12">
+          <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-3xl bg-gradient-to-br from-gold to-[#b38f2b] flex items-center justify-center shadow-2xl shrink-0">
+            <Calendar className="w-8 h-8 sm:w-10 sm:h-10 text-black" />
           </div>
           <div>
-            <h2 className="font-display text-5xl font-semibold tracking-tighter">Reserva tu mesa</h2>
-            <p className="text-accent/60 text-lg">Restaurante • Restaurante</p>
+            <h2 className="font-display text-4xl sm:text-5xl font-bold tracking-tight text-text-light dark:text-text-dark">
+              Reserva tu mesa
+            </h2>
+            <p className="text-lg sm:text-xl text-gold/80 mt-1">
+              Brasas y Leños • Experiencia exclusiva
+            </p>
           </div>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-7">
-          {/* Fecha y Hora */}
-          <div className="grid grid-cols-2 gap-5">
+        <form onSubmit={handleSubmit} className="space-y-6 sm:space-y-8">
+          {/* Fecha y Hora – en columna en móvil */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <div>
-              <label className="block text-sm font-medium mb-2 text-accent/70">Fecha</label>
+              <label className="block text-sm font-medium mb-2 sm:mb-3 text-gold/70">Fecha</label>
               <input
                 type="date"
                 required
                 value={form.date}
                 onChange={(e) => setForm({ ...form, date: e.target.value })}
-                className="w-full bg-white/5 dark:bg-black/30 border border-white/10 focus:border-primary rounded-2xl px-6 py-4 outline-none text-lg transition"
+                className="w-full bg-white/5 border border-gold/30 focus:border-gold rounded-2xl px-5 py-4 sm:px-7 sm:py-5 text-base sm:text-lg outline-none transition"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium mb-2 text-accent/70">Hora</label>
+              <label className="block text-sm font-medium mb-2 sm:mb-3 text-gold/70">Hora</label>
               <input
                 type="time"
                 required
                 value={form.time}
                 onChange={(e) => setForm({ ...form, time: e.target.value })}
-                className="w-full bg-white/5 dark:bg-black/30 border border-white/10 focus:border-primary rounded-2xl px-6 py-4 outline-none text-lg transition"
+                className="w-full bg-white/5 border border-gold/30 focus:border-gold rounded-2xl px-5 py-4 sm:px-7 sm:py-5 text-base sm:text-lg outline-none transition"
               />
             </div>
           </div>
 
           {/* Personas */}
           <div>
-            <label className="block text-sm font-medium mb-2 text-accent/70">Número de personas</label>
+            <label className="block text-sm font-medium mb-2 sm:mb-3 text-gold/70">Número de personas</label>
             <select
               value={form.guests}
               onChange={(e) => setForm({ ...form, guests: e.target.value })}
-              className="w-full bg-white/5 dark:bg-black/30 border border-white/10 focus:border-primary rounded-2xl px-6 py-4 outline-none text-lg transition"
+              className="w-full bg-white/5 border border-gold/30 focus:border-gold rounded-2xl px-5 py-4 sm:px-7 sm:py-5 text-base sm:text-lg outline-none transition"
             >
               {[1, 2, 3, 4, 5, 6, 7, 8].map((n) => (
                 <option key={n} value={n}>
@@ -94,42 +102,68 @@ const ReservationModal: React.FC = () => {
             </select>
           </div>
 
-          {/* Nombre y Email */}
+          {/* Nombre */}
           <div>
-            <label className="block text-sm font-medium mb-2 text-accent/70">Nombre completo</label>
+            <label className="block text-sm font-medium mb-2 sm:mb-3 text-gold/70">Nombre completo</label>
             <input
               type="text"
-              placeholder="Alessandro Rossi"
+              placeholder="Juan Pérez"
               required
               value={form.name}
               onChange={(e) => setForm({ ...form, name: e.target.value })}
-              className="w-full bg-white/5 dark:bg-black/30 border border-white/10 focus:border-primary rounded-2xl px-6 py-4 outline-none text-lg transition"
+              className="w-full bg-white/5 border border-gold/30 focus:border-gold rounded-2xl px-5 py-4 sm:px-7 sm:py-5 text-base sm:text-lg outline-none transition"
             />
           </div>
 
+          {/* Email */}
           <div>
-            <label className="block text-sm font-medium mb-2 text-accent/70">Email</label>
+            <label className="block text-sm font-medium mb-2 sm:mb-3 text-gold/70">Email</label>
             <input
               type="email"
-              placeholder="hola@Restaurante.it"
+              placeholder="hola@brasasyleños.com"
               required
               value={form.email}
               onChange={(e) => setForm({ ...form, email: e.target.value })}
-              className="w-full bg-white/5 dark:bg-black/30 border border-white/10 focus:border-primary rounded-2xl px-6 py-4 outline-none text-lg transition"
+              className="w-full bg-white/5 border border-gold/30 focus:border-gold rounded-2xl px-5 py-4 sm:px-7 sm:py-5 text-base sm:text-lg outline-none transition"
             />
           </div>
 
-          {/* Botón premium */}
+          {/* Teléfono */}
+          <div>
+            <label className="block text-sm font-medium mb-2 sm:mb-3 text-gold/70">Teléfono</label>
+            <div className="relative">
+              <Phone className="absolute left-5 sm:left-7 top-1/2 -translate-y-1/2 text-gold/60 w-5 h-5 sm:w-6 sm:h-6" />
+              <input
+                type="tel"
+                placeholder="+57 300 123 4567"
+                required
+                value={form.phone}
+                onChange={(e) => setForm({ ...form, phone: e.target.value })}
+                className="w-full bg-white/5 border border-gold/30 focus:border-gold rounded-2xl pl-14 sm:pl-16 pr-5 sm:pr-7 py-4 sm:py-5 text-base sm:text-lg outline-none transition"
+              />
+            </div>
+          </div>
+
+          {/* Botón confirmar */}
           <button
             type="submit"
-            className="btn-primary w-full py-7 text-xl font-medium rounded-3xl mt-4 shadow-2xl hover:scale-[1.02] transition-all duration-300"
+            className="group relative w-full py-6 sm:py-8 text-xl sm:text-2xl font-bold text-black bg-gradient-to-r from-gold to-[#b38f2b] rounded-3xl shadow-2xl overflow-hidden transition-all hover:scale-[1.03] active:scale-95 mt-4 sm:mt-6"
           >
-            Confirmar reserva
+            <span className="relative z-10">Confirmar Reserva</span>
+            <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/40 to-transparent skew-x-12 transition-transform duration-700 group-hover:translate-x-full" />
           </button>
 
-          <p className="text-center text-xs text-accent/50 mt-4">
-            Te enviaremos confirmación por email
-          </p>
+          {/* Teléfono alternativo */}
+          <div className="text-center pt-6 sm:pt-8 border-t border-gold/20">
+            <p className="text-gold/70 text-base sm:text-lg">¿Prefieres reservar por teléfono?</p>
+            <a
+              href={`tel:${restaurantConfig.location.phone}`}
+              className="mt-3 inline-flex items-center gap-3 text-2xl sm:text-3xl font-medium text-gold hover:text-gold/90 transition"
+            >
+              <Phone className="w-6 h-6 sm:w-8 sm:h-8" />
+              {restaurantConfig.location.phone}
+            </a>
+          </div>
         </form>
       </div>
     </div>

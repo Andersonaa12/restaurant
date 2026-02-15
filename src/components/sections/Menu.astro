@@ -4,7 +4,7 @@ import SectionHeading from '../common/SectionHeading.astro';
 import MenuFilter from '../ui/MenuFilter.tsx';
 ---
 
-<section id="menu" class="py-32 bg-[#F9F5EB] dark:bg-[#0F0D0B]">
+<section id="menu" class="py-1  bg-gradient-to-b from-white via-[#FAF7F2] to-white dark:from-[#0F0D0B] dark:via-[#1A1612] dark:to-[#0F0D0B] transition-all duration-1000">
   <div class="max-w-7xl mx-auto px-6">
     <SectionHeading title="Nuestro Menú" subtitle="Cada plato cuenta una historia" />
     <MenuFilter client:load items={restaurantConfig.menu.items} categories={restaurantConfig.menu.categories} />

@@ -1,43 +1,159 @@
 ---
 import { restaurantConfig } from '../../data/restaurant.ts';
 import SectionHeading from '../common/SectionHeading.astro';
+
+const galleryImages = restaurantConfig.gallery;
 ---
 
-<section id="gallery" class="py-24 bg-zinc-50 dark:bg-zinc-950">
-  <SectionHeading title="Galería" subtitle="Un viaje visual por Restaurante" />
-  
-  <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-    {restaurantConfig.gallery.map((img, i) => (
-      <div 
-        key={i}
-        onclick={`openLightbox('${img.url}')`}
-        class="group relative overflow-hidden rounded-3xl cursor-pointer aspect-video"
-      >
-        <img src={img.url} alt={img.alt} class="w-full h-full object-cover group-hover:scale-110 transition duration-500" />
-        <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 p-6">
-          <p class="text-white text-sm">{img.caption}</p>
-        </div>
-      </div>
-    ))}
+<section 
+  id="gallery" 
+  class="relative py-4 md:py-2 bg-gradient-to-b from-white via-[#FAF7F2] to-white dark:from-[#0F0D0B] dark:via-[#1A1612] dark:to-[#0F0D0B] transition-all duration-1000"
+>
+  <!-- Fondo sutil de brasas ascendentes – premium y coherente con todo el sitio -->
+  <div class="absolute inset-0 pointer-events-none opacity-30 dark:opacity-15">
+    <div class="absolute top-1/4 left-1/6 w-96 h-96 bg-orange-600/20 rounded-full blur-3xl animate-ember-float animation-delay-[-6s]"></div>
+    <div class="absolute top-1/3 right-1/5 w-80 h-80 bg-yellow-600/15 rounded-full blur-3xl animate-ember-float animation-delay-[-14s]"></div>
+    <div class="absolute bottom-1/4 left-1/2 w-96 h-96 bg-red-700/20 rounded-full blur-3xl animate-ember-float animation-delay-[-9s]"></div>
+    <div class="absolute bottom-1/3 right-1/4 w-80 h-80 bg-orange-500/15 rounded-full blur-3xl animate-ember-float animation-delay-[-11s]"></div>
   </div>
 
-  <dialog id="lightbox" class="bg-black/95 m-auto max-w-5xl w-full p-4 rounded-3xl">
-    <div class="relative">
-      <button onclick="closeLightbox()" class="absolute top-4 right-4 text-white text-5xl leading-none">×</button>
-      <img id="lightbox-img" class="max-h-[85vh] w-full object-contain" />
+  <div class="relative max-w-7xl mx-auto px-6 z-10">
+    <!-- Heading premium con entrada animada -->
+    <div class="text-center mb-20 animate-fade-in-up">
+      <SectionHeading 
+        title="Galería" 
+        subtitle="Fuego, sabor y momentos inolvidables en Brasas y Leños" 
+        accentClass="text-gold drop-shadow-lg"
+      />
     </div>
-  </dialog>
 
-  <script>
-    function openLightbox(src: string) {
-      const dialog = document.getElementById('lightbox') as HTMLDialogElement;
-      const img = document.getElementById('lightbox-img') as HTMLImageElement;
-      img.src = src;
-      dialog.showModal();
-    }
-    function closeLightbox() {
-      const dialog = document.getElementById('lightbox') as HTMLDialogElement;
-      dialog.close();
-    }
-  </script>
+    <!-- Grid masonry premium con hover lift, glow dorado y caption reveal -->
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+      {galleryImages.map((img, i) => (
+        <div
+          class="group relative overflow-hidden rounded-3xl cursor-pointer shadow-2xl card-hover animate-fade-in-up"
+          style={{ animationDelay: `${i * 150 + 400}ms` }}
+          onclick={`openLightbox(${i})`}
+          role="button"
+          tabindex="0"
+          aria-label={`Abrir imagen: ${img.alt}`}
+        >
+          <!-- Imagen con zoom suave -->
+          <img
+            src={img.url}
+            alt={img.alt}
+            class="w-full h-full object-cover aspect-[4/3] transition-transform duration-1000 group-hover:scale-110"
+            loading="lazy"
+          />
+
+          <!-- Overlay con glow dorado y caption reveal elegante -->
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent  group-hover:opacity-100 transition-opacity duration-700"></div>
+          <div class="absolute inset-0 ring-2 ring-gold/0 group-hover:ring-gold/40 transition-all duration-700 blur-xl"></div>
+
+          <!-- Caption con slide-up y acento dorado -->
+          <div class="absolute bottom-0 left-0 right-0 p-8 translate-y-8 group-hover:translate-y-0 transition-transform duration-700">
+            <p class="text-white text-lg font-medium drop-shadow-lg">
+              <span class="block text-gold text-sm uppercase tracking-wider mb-1">Brasas y Leños</span>
+              {img.caption}
+            </p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
 </section>
+
+<!-- Lightbox premium con navegación, caption y transiciones suaves -->
+<dialog 
+  id="lightbox" 
+  class="backdrop:bg-black/95 backdrop:blur-xl bg-transparent open:animate-lightbox-open m-auto max-w-6xl w-full max-h-[90vh] p-0 rounded-3xl overflow-hidden border border-white/10"
+>
+  <div class="relative h-full">
+    <!-- Cerrar -->
+    <button 
+      onclick="closeLightbox()" 
+      class="absolute top-6 right-6 z-50 text-white text-5xl leading-none hover:text-gold transition-colors duration-300 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-gold/50"
+      aria-label="Cerrar lightbox"
+    >
+      ×
+    </button>
+
+    <!-- Navegación -->
+    <button 
+      id="prevBtn"
+      class="absolute left-6 top-1/2 -translate-y-1/2 z-50 text-white text-6xl leading-none opacity-70 hover:opacity-100 hover:text-gold transition-all duration-300 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-gold/50"
+      aria-label="Imagen anterior"
+    >
+      ‹
+    </button>
+    <button 
+      id="nextBtn"
+      class="absolute right-6 top-1/2 -translate-y-1/2 z-50 text-white text-6xl leading-none opacity-70 hover:opacity-100 hover:text-gold transition-all duration-300 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-gold/50"
+      aria-label="Imagen siguiente"
+    >
+      ›
+    </button>
+
+    <!-- Imagen principal -->
+    <img 
+      id="lightbox-img" 
+      class="max-w-full max-h-[85vh] mx-auto object-contain drop-shadow-2xl"
+      alt=""
+    />
+
+    <!-- Caption -->
+    <p 
+      id="lightbox-caption" 
+      class="absolute bottom-8 left-1/2 -translate-x-1/2 text-white text-xl font-medium bg-black/50 backdrop-blur-md px-8 py-4 rounded-full drop-shadow-lg"
+    ></p>
+  </div>
+</dialog>
+
+<script define:vars={{ galleryImages }}>
+  const images = galleryImages.map(img => ({ url: img.url, alt: img.alt, caption: img.caption }));
+  let currentIndex = 0;
+
+  const dialog = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+  const lightboxCaption = document.getElementById('lightbox-caption');
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+
+  function updateLightbox() {
+    const img = images[currentIndex];
+    lightboxImg.src = img.url;
+    lightboxImg.alt = img.alt;
+    lightboxCaption.textContent = img.caption || '';
+  }
+
+  window.openLightbox = (index) => {
+    currentIndex = index;
+    updateLightbox();
+    dialog.showModal();
+  };
+
+  window.closeLightbox = () => dialog.close();
+
+  prevBtn.onclick = () => {
+    currentIndex = (currentIndex - 1 + images.length) % images.length;
+    updateLightbox();
+  };
+
+  nextBtn.onclick = () => {
+    currentIndex = (currentIndex + 1) % images.length;
+    updateLightbox();
+  };
+
+  // Cerrar al click en backdrop
+  dialog.addEventListener('click', (e) => {
+    if (e.target === dialog) closeLightbox();
+  });
+
+  // Navegación con teclado
+  document.addEventListener('keydown', (e) => {
+    if (!dialog.open) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') prevBtn.click();
+    if (e.key === 'ArrowRight') nextBtn.click();
+  });
+</script>

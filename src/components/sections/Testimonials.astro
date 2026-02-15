@@ -1,27 +1,72 @@
 ---
 import { restaurantConfig } from '../../data/restaurant.ts';
 import SectionHeading from '../common/SectionHeading.astro';
+
+const testimonials = restaurantConfig.testimonials;
 ---
 
-<section id="testimonials" class="py-32 bg-[#F9F5EB] dark:bg-[#0F0D0B]">
-  <div class="max-w-6xl mx-auto px-6">
-    <SectionHeading title="Voces de nuestros clientes" subtitle="Lo que se vive en Restaurante" />
-    
-    <div class="grid md:grid-cols-3 gap-8">
-      {restaurantConfig.testimonials.map((t, i) => (
-        <div key={i} class="glass rounded-3xl p-10 card-hover">
-          <div class="flex gap-1 text-primary text-2xl mb-8">
+<section 
+  id="testimonials" 
+  class="relative py-2 md:py-2 overflow-hidden bg-gradient-to-b from-[#FAF7F2] via-[#F9F5EB] to-[#FAF7F2] 
+          dark:from-[#0F0D0B] dark:via-[#1A1612] dark:to-[#0F0D0B] transition-all duration-1000"
+>
+  <!-- Fondo sutil de brasas ascendentes – premium y coherente con todo el sitio -->
+  <div class="absolute inset-0 pointer-events-none opacity-40 dark:opacity-20">
+    <div class="absolute top-1/5 left-1/6 w-96 h-96 bg-orange-500/20 rounded-full blur-3xl animate-ember-float animation-delay-[-4s]"></div>
+    <div class="absolute top-1/3 right-1/4 w-80 h-80 bg-yellow-600/15 rounded-full blur-3xl animate-ember-float animation-delay-[-10s]"></div>
+    <div class="absolute bottom-1/3 left-1/3 w-96 h-96 bg-red-700/20 rounded-full blur-3xl animate-ember-float animation-delay-[-7s]"></div>
+    <div class="absolute bottom-1/4 right-1/5 w-80 h-80 bg-orange-600/15 rounded-full blur-3xl animate-ember-float animation-delay-[-13s]"></div>
+  </div>
+
+  <div class="relative max-w-7xl mx-auto px-6 z-10">
+    <!-- Heading premium con entrada animada -->
+    <div class="text-center mb-20  animate-fade-in-up">
+      <SectionHeading 
+        title="Voces de nuestros clientes" 
+        subtitle="Lo que se vive en Brasas y Leños" 
+        accentClass="text-gold drop-shadow-lg"
+      />
+    </div>
+
+    <!-- Grid de testimonios – cards premium con hover lift y glow dorado -->
+    <div class="grid md:grid-cols-3 gap-12">
+      {testimonials.map((t, i) => (
+        <div
+          class="group relative glass rounded-3xl p-10 shadow-2xl card-hover  animate-fade-in-up"
+          style={{ animationDelay: `${i * 200 + 400}ms` }}
+        >
+          <div class="flex gap-1 text-yellow-500 text-3xl mb-8">
             {'★'.repeat(t.rating)}
+            <span class="absolute inset-0 blur-xl opacity-60 animate-glow-pulse text-gold">
+              {'★'.repeat(t.rating)}
+            </span>
           </div>
-          <p class="text-xl leading-relaxed italic">“{t.text}”</p>
-          
-          <div class="flex items-center gap-4 mt-12">
-            <img src={t.image} class="w-14 h-14 rounded-2xl object-cover" alt={t.name} />
+
+          <!-- Quote con estilo premium -->
+          <blockquote class="text-xl md:text-2xl leading-relaxed italic text-text-light dark:text-text-dark relative">
+            “{t.text}”
+          </blockquote>
+
+          <!-- Autor con imagen redondeada y hover sutil -->
+          <div class="flex items-center gap-6 mt-12">
+            <div class="relative">
+              <img 
+                src={t.image} 
+                alt={t.name} 
+                class="w-20 h-20 rounded-full object-cover ring-4 ring-gold/30 group-hover:ring-gold transition-all duration-500"
+                loading="lazy"
+              />
+              <div class="absolute inset-0 rounded-full ring-4 ring-gold/0 group-hover:ring-gold/50 transition-all duration-500 blur-xl"></div>
+            </div>
             <div>
-              <p class="font-medium">{t.name}</p>
-              <p class="text-sm text-accent/60">{t.role}</p>
+              <p class="font-display text-xl font-bold text-text-light dark:text-text-dark group-hover:text-gold transition-colors duration-500">
+                {t.name}
+              </p>
+              <p class="text-lg text-gold/80">{t.role}</p>
             </div>
           </div>
+
+          <div class="absolute inset-0 bg-gradient-to-br from-gold/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-1000 blur-2xl pointer-events-none"></div>
         </div>
       ))}
     </div>
